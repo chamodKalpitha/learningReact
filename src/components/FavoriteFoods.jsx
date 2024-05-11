@@ -1,13 +1,43 @@
+import { LikedUser } from "./LikedUser";
+import styles from "./favoriteFoods.module.css";
 export function FavoriteFoods() {
+  const userData = [
+    {
+      id: 1,
+      username: "perera",
+      count: 30,
+    },
+    {
+      id: 2,
+      username: "Shanthi",
+      count: 50,
+    },
+  ];
+
+  // const element = userData.map((user) => {
+  //   return (
+  //     <LikedUser key={user.id} userName={user.username} count={user.count} />
+  //   );
+  // });
+
   return (
     <section>
-      <span>Favorite Foods</span>
+      <span className={styles.title}>Favorite Foods</span>
       <br />
       <ul>
-        <li>Sushi</li>
-        <li>Pizza</li>
-        <li>Mediterranean Food</li>
+        <li className={styles.items}>Sushi</li>
+        <li className={styles.items}>Pizza</li>
+        <li className={styles.items}>Mediterranean Food</li>
       </ul>
+      {userData.map((user) => {
+        return (
+          <LikedUser
+            key={user.id}
+            userName={user.username}
+            count={user.count}
+          />
+        );
+      })}
     </section>
   );
 }
