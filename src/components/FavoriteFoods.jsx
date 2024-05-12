@@ -14,12 +14,6 @@ export function FavoriteFoods() {
     },
   ];
 
-  // const element = userData.map((user) => {
-  //   return (
-  //     <LikedUser key={user.id} userName={user.username} count={user.count} />
-  //   );
-  // });
-
   return (
     <section>
       <span className={styles.title}>Favorite Foods</span>
