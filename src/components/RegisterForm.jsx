@@ -1,23 +1,29 @@
 import { useState } from "react";
 
 export function RegisterForm() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("");
+  const [formfield, setFormFields] = useState({
+    username: "",
+    password: "",
+    displayName: "",
+  });
 
-  const isDisabled = !username || !password || !displayName;
+  const isActive =
+    !formfield.displayName || !formfield.password || !formfield.username;
 
   return (
-    <form>
+    <form onSubmit={(e) => e.preventDefault()}>
       <div>
         <label htmlFor="rusername">Username</label>
         <input
           type="text"
           name="rusername"
           id="rusername"
-          value={username}
+          value={formfield.username}
           onChange={(e) => {
-            setUsername((prevUsername) => (prevUsername = e.target.value));
+            setFormFields((preFormFields) => ({
+              ...preFormFields,
+              username: e.target.value,
+            }));
           }}
         />
       </div>
@@ -27,8 +33,13 @@ export function RegisterForm() {
           type="text"
           name="rpassword"
           id="rpassword"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formfield.password}
+          onChange={(e) =>
+            setFormFields((preFormFields) => ({
+              ...preFormFields,
+              password: e.target.value,
+            }))
+          }
         />
       </div>
       <div>
@@ -37,17 +48,22 @@ export function RegisterForm() {
           type="text"
           name="rdisplayname"
           id="rdisplayname"
-          value={displayName}
-          onChange={(e) => setDisplayName(e.target.value)}
+          value={formfield.displayName}
+          onChange={(e) => {
+            setFormFields((preFormFields) => ({
+              ...preFormFields,
+              displayName: e.target.value,
+            }));
+          }}
         />
       </div>
-      <button disabled={isDisabled}>Register</button>
+      <button disabled={isActive}>Register</button>
       <div>
-        <span>username: {username}</span>
+        <span>username: {formfield.username}</span>
         <br />
-        <span>password: {password}</span>
+        <span>password: {formfield.password}</span>
         <br />
-        <span>display Name: {displayName}</span>
+        <span>display Name: {formfield.displayName}</span>
       </div>
     </form>
   );
