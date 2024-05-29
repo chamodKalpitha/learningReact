@@ -14,7 +14,18 @@ export function UserDetails({ id, name, age, email, setstate }) {
         <button onClick={() => setisEditing((cuurentState) => !cuurentState)}>
           {!isEditing ? "Edit" : "Cancel"}
         </button>
-        <button>Delete</button>
+        <button
+          onClick={() => {
+            setstate((currentState) => {
+              currentState.filter((value) => {
+                if (value.id !== id) return false;
+              });
+              console.log(currentState);
+            });
+          }}
+        >
+          Delete
+        </button>
         <button
           disabled={!isEditing}
           onClick={() => {

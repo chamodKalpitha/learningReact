@@ -7,7 +7,7 @@ import { ArrayState } from "./ArrayState";
 export function UserProfile() {
   return (
     <div>
-      <UserDetails
+      {/* <UserDetails
         key={20}
         id={22}
         name="chamod"
@@ -17,7 +17,7 @@ export function UserProfile() {
       />
       <FavoriteFoods />
       <LoginForm />
-      <RegisterForm />
+      <RegisterForm /> */}
       <ArrayState />
     </div>
   );

@@ -1,18 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-export default function App() {
-  const [status, setStatus] = useState(false);
-  return (
-    <div>
-      <button onClick={() => setStatus((currentStatus) => !currentStatus)}>
-        Toggle
-      </button>
-      {status && <Name />}
-    </div>
-  );
-}
-
-function Name() {
+export default function Name() {
   useEffect(() => {
     const resizeEventHandler = (e) => {
       console.log("Window/ViewPort Resized!");
