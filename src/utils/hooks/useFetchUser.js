@@ -1,0 +1,35 @@
+import { useEffect, useState } from "react";
+
+const userApiUrl = "https://jsonplaceholder.typicode.com/users";
+
+export function useFetchUser(userId) {
+  const [userData, setUserData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setLoading(true);
+
+    fetch(`${userApiUrl}/${userId}`, { signal: controller.signal })
+      .then((response) => response.json())
+      .then((data) => {
+        setUserData(data);
+        setError(undefined);
+        setLoading(false); // Immediately set loading to false once data is fetched
+      })
+      .catch((err) => {
+        if (err.name !== "AbortError") {
+          // Avoid setting error if fetch was aborted
+          setError(err);
+        }
+        setLoading(false); // Immediately set loading to false in case of error
+      });
+
+    return () => {
+      controller.abort();
+    };
+  }, [userId]);
+
+  return { user: userData, loading, error };
+}
